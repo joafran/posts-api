@@ -22,3 +22,20 @@ export const getPost = async (req, res) => {
         return res.status(404).send("Not found");
     }
 }
+
+export const deletePost = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const post = await Post.destroy({
+            where: { id }
+        });
+        if(!post) {
+            return res.status(400).send('Invalid post ID');
+        } else {
+            return res.json({msg: 'Post deleted successfully!'})
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
