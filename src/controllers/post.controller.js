@@ -73,7 +73,11 @@ export const updatePost = async (req, res) => {
             where: { id },
         }
         )
-        if(post) return res.json({msg: 'Post updated successfully'});
+        if(!post[0]) {
+            return res.status(400).send('Invalid post ID');
+        } else {
+            return res.json({msg: 'Post updated successfully!'})
+        }
     } catch (error) {
         return res.status(400).send(error);
     }
