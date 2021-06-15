@@ -39,3 +39,21 @@ export const deletePost = async (req, res) => {
         console.log(error);
     }
 }
+
+export const createPost = async (req, res) => {
+    const { title, content, image, category } = req.body;
+    try {
+        const post = await Post.create(
+            { 
+                title,
+                content,
+                image,
+                category
+            }
+        );
+        return res.json(post);
+        
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+}
