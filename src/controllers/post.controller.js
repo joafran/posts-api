@@ -57,3 +57,24 @@ export const createPost = async (req, res) => {
         return res.status(400).json(error);
     }
 }
+
+export const updatePost = async (req, res) => {
+    const { id } = req.params;
+    const { title, content, image, category } = req.body;
+    try {
+        const post = await Post.update(
+        {
+            title,
+            content,
+            image,
+            category,
+        },
+        {
+            where: { id },
+        }
+        )
+        if(post) return res.json({msg: 'Post updated successfully'});
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+};
