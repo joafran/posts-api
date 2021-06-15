@@ -11,7 +11,10 @@ const Post = db.define('post', {
         allowNull: false
     },
     image: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        validate: {
+            is: /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i
+        }
     },
     category: {
         type: DataTypes.STRING
